@@ -3,6 +3,8 @@
 
 
 name = input('Enter name of file to be alphabetized:') # Input function in python prints out a statement for the user to read, then allows them to input characters, which is returned as a string.
+                                                       # Variable declaration in Python is done simply by [name of variable] = [data of variable]. This is unlike most other programming languages,
+                                                       #which need a type declaration before the name of the variable or setting its data.
 with open(name) as f:                                  # Opening a file requires the name in the form of a string. There is the option to specify whether one is reading or writing, but
                                                        #leaving the second argument blank (ie not specifying at all) will make it default to read-only. It is considered better to put the usage of a
                                                        #file in a with statement, so it will close when the statement is finished regardless of errors.
