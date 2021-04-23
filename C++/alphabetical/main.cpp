@@ -5,6 +5,7 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include <iterator>
 #include <vector>														/* This collection of included items will allow the usage of the standard C++ library,
 																		  file manipulation, input and output operators, strings, and vectors. C++ requires to 
 																		  add such headers in one's program, otherwise the associated data objects cannot be used.*/
@@ -32,12 +33,14 @@ int main() {															/* Unlike in Python, to run a C++ program on its own,
 
 	std::sort(c.begin(), c.end());										// The vector, which contains every character in the original file, is sorted in alphabetical order.
 
-	std::vector<char>::iterator it = c.begin();							// To go through and manipulate the vector, I create an iterator.
-	while (it != c.end()) {												// Loop that iterates through the vector of characters and erases newline characters and whitespaces.
-		if ((*it) == '\n' || (*it) == ' ') {
-			c.erase(it);
+	int it = 0;															// To go through and manipulate the vector, I use an integer as an iterator.
+	while (it != c.size()) {											// Loop that iterates through the vector of characters and erases newline characters and whitespaces.
+		if (c[it] == '\n' || c[it] == ' ') {
+			c.erase(c.begin() + it);
 		}
-		it++;
+		else {
+			it++;
+		}
 	}
 
 	if (name.find(".txt") < name.length()) {							// Statement that erases '.txt' from the end of the file and adds '_alphabetized.txt' to the end.
@@ -49,11 +52,16 @@ int main() {															/* Unlike in Python, to run a C++ program on its own,
 	}
 
 	std::ofstream a;													// A new output stream so I can write to a new file.
-	a.open(name);														// Creating and opening a new file with the new name to write to.
-	for (std::vector<char>::iterator it = c.begin(); it != c.end(); it++) { /* Loop that iterates through the character vector and adds the characters into the new file, now
-																			in alphabetical order.*/
-		a << (*it);
+	a.open(name, std::ios::out);										// Creating and opening a new file with the new name to write to.
+	
+	std::string s = "";													/* Putting the characters in the vector into one single string, because trying to write the chars
+																		one by one into the file does not work.*/
+	for (int i = 1; i != c.size(); ++i) {
+		s = s + c[i];
 	}
+	
+	a << s;																// The new full string is put into the file.
+
 	a.close();															// Closes the new file so that it isn't left open.
 
 	std::cout << "File alphabetized!" << std::endl;						// Lets the user know that the program is finished.
