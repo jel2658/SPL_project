@@ -1,5 +1,5 @@
 # Program to grab a file and alphabetize its contents, creating a new .txt file
-# with everything alphabetized
+# with everything alphabetized.
 
 
 name = input('Enter name of file to be alphabetized:') # Input function in python prints out a statement for the user to read, then allows them to input characters, which is returned as a string.
@@ -11,7 +11,11 @@ with open(name) as f:                                  # Opening a file requires
     a = f.read()                                       # 'a' is now a copy of the file object, which can be edited in this form.
     aList = sorted(a)                                  # aList is a sorted, alphabetically and by case, list of the file.
     try:                                               # A code block intended to remove newline characters and whitespaces from the list of characters.
-        while True:
+        while True:                                    # 'while True:' is an infinite loop, which is not exactly "good programming practice", but in the event
+                                                       #that one needs a program to continuously iterate unless an error occurs, it works. Since I use 'try:' instead of
+                                                       #just having the infinite loop, if a ValueError exception is caught, then the loop terminates. This is akin to,
+                                                       #perhaps, setting a while loop with a condition of throwing an error, but that isn't a possibility- at least
+                                                       #in Python.
             aList.remove('\n')
     except ValueError:
         pass
